@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -32,10 +31,18 @@ public class BabyCare extends AppCompatActivity {
     public long timeSpeedEasy = 1000;
     public long timeSpeedNormal = 750;
     public long timeSpeedHard = 500;
+    //Store selected Game mode to pass to Winner intent
+    public String selectedDifficulty;
+    //Allow only one action per cycle
+    public boolean isButtonPressedInCycleAlready = false;
+    //To avoid further button pressed action, if any of these are true.
+    public boolean isMumCalled = false;
+    public boolean isWinner = false;
+    public boolean isGameOver = false;
     //Names to pass over
     String babyName = "Baby";
     String papaName = "Papa";
-    String girlOrBoyToIntent ="girl";
+    String girlOrBoyToIntent = "girl";
     //Strings from strings.xml
     String bu_play_baby = "Play";
     String bu_feed = "Feed";
@@ -64,20 +71,10 @@ public class BabyCare extends AppCompatActivity {
     int score = -1;
     //Game Mode modifier variable
     int gameMode;
-    //Store selected Game mode to pass to Winner intent
-    public String selectedDifficulty;
     //Random variable
     Random random = new Random();
     //To prevent accidentally call mum you must tap twice in 3 game speed
     int callingForMum = 0;
-    //Allow only one action per cycle
-    public boolean isButtonPressedInCycleAlready = false;
-
-    //To avoid further button pressed action, if any of these are true.
-    public boolean isMumCalled = false;
-    public boolean isWinner = false;
-    public boolean isGameOver = false;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +94,7 @@ public class BabyCare extends AppCompatActivity {
         //Name TextViews
         TextView bn = (TextView) findViewById(R.id.babyname);
         TextView pn = (TextView) findViewById(R.id.papaname);
-    //Set the names
+        //Set the names
         bn.setText(String.valueOf(babyName));
         pn.setText(String.valueOf(papaName));
 
@@ -119,7 +116,7 @@ public class BabyCare extends AppCompatActivity {
         final View bgBoy = findViewById(R.id.activity_baby_care);
 
         //Views for baby button backgrounds changes
-        final View bp = findViewById(R.id.bu_baby_play);
+        final View bp = findViewById(bu_baby_play);
         final View bf = findViewById(R.id.bu_feed);
         final View bd = findViewById(R.id.bu_diaper);
         final View bs = findViewById(R.id.bu_sleep);
@@ -315,297 +312,297 @@ public class BabyCare extends AppCompatActivity {
                                 badParent();
                                 //To win the game, these are the requirement:
                             } else if (babyHappiness >= 90 && papaHappiness >= 90 && feedLevel >= 90 && papaTiredness <= 50) {
-                                    winner();
-                                } else
+                                winner();
+                            } else
                             //Run game logic if not geme over or win
-                                    {
+                            {
 
-                            //Reset the isButtonPressed variables
-                            isButtonPressedInCycleAlready = false;
+                                //Reset the isButtonPressed variables
+                                isButtonPressedInCycleAlready = false;
 
-                            //Counting score based on GameMode speed
-                            score += 1;
-                            tvScore.setText(String.valueOf(score));
+                                //Counting score based on GameMode speed
+                                score += 1;
+                                tvScore.setText(String.valueOf(score));
 
 //Call for Mum button check
-                            if (callingForMum != 0) {
-                                callingForMum -= 1;
-                            }
+                                if (callingForMum != 0) {
+                                    callingForMum -= 1;
+                                }
 //Correcting happiness, can not be more than 100 max level
-                            if (babyHappiness > 100) {
-                                babyHappiness = 100;
-                                tvInfo.setText(String.valueOf(babyName + "'s Happiness is at maximum!"));
+                                if (babyHappiness > 100) {
+                                    babyHappiness = 100;
+                                    tvInfo.setText(String.valueOf(babyName + "'s Happiness is at maximum!"));
 
-                            }
-                            if (papaHappiness > 100) {
-                                papaHappiness = 100;
-                                tvInfo.setText(String.valueOf(papaName + "'s Happiness is at maximum!"));
-                            }
-
-                            //Checking level overflows
-                            if (diaperLevel > 100) {
-                                diaperLevel = 0;
-                                int diaperRandom = random.nextInt(10);
-                                int newBH = 5 + diaperRandom + gameMode * 3;
-                                babyHappiness -= newBH;
-                                modifiedHappiness = newBH;
-                                tvInfo.setText(String.valueOf(babyName + "'s Diaper overflow!!!"));
-                            }
-                            if (peeLevel > 100) {
-                                peeLevel = 0;
-                                int peeRandom = random.nextInt(10);
-                                int newPH = 10 + peeRandom * gameMode;
-                                papaHappiness -= newPH;
-                                modifiedHappinessPapa = newPH;
-                                tvInfo.setText(String.valueOf(papaName + " could not manage to reach the lavatory!"));
-                            }
-                            if (papaTiredness > 100) {
-                                isPapaNap = true;
-                                nap = 9 + gameMode * 3;
-                                tvInfo.setText(String.valueOf(papaName + "'s Tiredness level made him fell asleep"));
-                            }
-
-                            //Papa is playing
-                            if (isPapaPlaying && papaPlaying > 0) {
-                                papaPlaying -= 1;
-                                buPlayGame.setText(String.valueOf(papaPlaying));
-                                buTakeANap.setText(String.valueOf(papaPlaying));
-                                buBabyPlay.setText(String.valueOf(papaPlaying));
-                                buDiaper.setText(String.valueOf(papaPlaying));
-
-                                buFeed.setText(String.valueOf(papaPlaying));
-                                buPee.setText(String.valueOf(papaPlaying));
-                                buSleep.setText(String.valueOf(papaPlaying));
-
-                                bp.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
-                                bf.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
-                                bd.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
-                                bs.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
-
-                                pplay.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
-                                //Can drink beer while playing
-                                ppee.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
-                                pnap.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
-
-                            } else if (isPapaPlaying) {
-                                isPapaPlaying = false;
-                                buPlayGame.setText(bu_play_game);
-                                buTakeANap.setText(bu_take_a_nap);
-                                buBabyPlay.setText(bu_play_baby);
-                                buDiaper.setText(bu_diaper);
-
-                                buFeed.setText(bu_feed);
-                                buPee.setText(bu_pee);
-                                buSleep.setText(bu_sleep);
-
-                                pplay.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundPapa));
-                                pbeer.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundPapa));
-                                ppee.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundPapa));
-                                pnap.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundPapa));
-
-                                if (girlOrBoy.equals("boy")) {
-                                    bp.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundBoy));
-                                    bf.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundBoy));
-                                    bd.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundBoy));
-                                    bs.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundBoy));
-                                } else {
-                                    bp.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackground));
-                                    bf.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackground));
-                                    bd.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackground));
-                                    bs.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackground));
                                 }
-                            }
-                                        //Changing pictures based on happiness level
-                                        if (babyHappiness > 75) {
-                                            babyImage.setImageResource(R.drawable.babyhappy);
-                                        } else if (babyHappiness > 35) {
-                                            babyImage.setImageResource(R.drawable.babyneutral);
-                                        } else {
-                                            babyImage.setImageResource(R.drawable.babysad);
-                                        }
-
-                                        if (papaHappiness > 75) {
-                                            papaImage.setImageResource(R.drawable.papahappy);
-                                        } else if (papaHappiness > 35) {
-                                            papaImage.setImageResource(R.drawable.papaneutral);
-                                        } else {
-                                            papaImage.setImageResource(R.drawable.papasad);
-                                        }
-
-                            //Papa taking a nap
-                            if (nap == 0 && isPapaNap) {
-                                papaHappiness -= 1;
-                                papaTiredness += 1;
-                                isPapaNap = false;
-                                buTakeANap.setText(bu_take_a_nap);
-                                buBabyPlay.setText(bu_play_baby);
-                                buDiaper.setText(bu_diaper);
-                                buDrinkBeer.setText(bu_drink_beer);
-                                buFeed.setText(bu_feed);
-                                buPlayGame.setText(bu_play_game);
-                                buPee.setText(bu_pee);
-                                buSleep.setText(bu_sleep);
-
-                                pplay.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundPapa));
-                                pbeer.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundPapa));
-                                ppee.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundPapa));
-                                pnap.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundPapa));
-
-                                if (girlOrBoy.equals("boy")) {
-                                    bp.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundBoy));
-                                    bf.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundBoy));
-                                    bd.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundBoy));
-                                    bs.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundBoy));
-                                } else {
-                                    bp.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackground));
-                                    bf.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackground));
-                                    bd.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackground));
-                                    bs.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackground));
+                                if (papaHappiness > 100) {
+                                    papaHappiness = 100;
+                                    tvInfo.setText(String.valueOf(papaName + "'s Happiness is at maximum!"));
                                 }
 
-                            } else if (nap == 0) {
-                                papaHappiness -= 1;
-                                papaTiredness += 1;
-                            } else if (nap > 0) {
-                                int newPT = 6 + random.nextInt(8) - gameMode*2;
-                                papaTiredness -= newPT;
-                                nap -= 1;
-                                buTakeANap.setText(String.valueOf(nap));
-                                buBabyPlay.setText(String.valueOf(nap));
-                                buDiaper.setText(String.valueOf(nap));
-                                buDrinkBeer.setText(String.valueOf(nap));
-                                buFeed.setText(String.valueOf(nap));
-                                buPlayGame.setText(String.valueOf(nap));
-                                buPee.setText(String.valueOf(nap));
-                                buSleep.setText(String.valueOf(nap));
+                                //Checking level overflows
+                                if (diaperLevel > 100) {
+                                    diaperLevel = 0;
+                                    int diaperRandom = random.nextInt(10);
+                                    int newBH = 5 + diaperRandom + gameMode * 3;
+                                    babyHappiness -= newBH;
+                                    modifiedHappiness = newBH;
+                                    tvInfo.setText(String.valueOf(babyName + "'s Diaper overflow!!!"));
+                                }
+                                if (peeLevel > 100) {
+                                    peeLevel = 0;
+                                    int peeRandom = random.nextInt(10);
+                                    int newPH = 10 + peeRandom * gameMode;
+                                    papaHappiness -= newPH;
+                                    modifiedHappinessPapa = newPH;
+                                    tvInfo.setText(String.valueOf(papaName + " could not manage to reach the lavatory!"));
+                                }
+                                if (papaTiredness > 100) {
+                                    isPapaNap = true;
+                                    nap = 9 + gameMode * 3;
+                                    tvInfo.setText(String.valueOf(papaName + "'s Tiredness level made him fell asleep"));
+                                }
 
-                                papaImage.setImageResource(R.drawable.papanap);
+                                //Papa is playing
+                                if (isPapaPlaying && papaPlaying > 0) {
+                                    papaPlaying -= 1;
+                                    buPlayGame.setText(String.valueOf(papaPlaying));
+                                    buTakeANap.setText(String.valueOf(papaPlaying));
+                                    buBabyPlay.setText(String.valueOf(papaPlaying));
+                                    buDiaper.setText(String.valueOf(papaPlaying));
 
-                                bp.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
-                                bf.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
-                                bd.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
-                                bs.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
+                                    buFeed.setText(String.valueOf(papaPlaying));
+                                    buPee.setText(String.valueOf(papaPlaying));
+                                    buSleep.setText(String.valueOf(papaPlaying));
 
-                                pplay.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
-                                pbeer.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
-                                ppee.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
-                                pnap.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
-                            }
+                                    bp.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
+                                    bf.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
+                                    bd.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
+                                    bs.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
 
-                            if (papaTiredness < 0) {
-                                //isPapaNap = false;
-                                nap = 0;
-                                papaTiredness = 0;
-                            }
+                                    pplay.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
+                                    //Can drink beer while playing
+                                    ppee.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
+                                    pnap.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
+
+                                } else if (isPapaPlaying) {
+                                    isPapaPlaying = false;
+                                    buPlayGame.setText(bu_play_game);
+                                    buTakeANap.setText(bu_take_a_nap);
+                                    buBabyPlay.setText(bu_play_baby);
+                                    buDiaper.setText(bu_diaper);
+
+                                    buFeed.setText(bu_feed);
+                                    buPee.setText(bu_pee);
+                                    buSleep.setText(bu_sleep);
+
+                                    pplay.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundPapa));
+                                    pbeer.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundPapa));
+                                    ppee.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundPapa));
+                                    pnap.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundPapa));
+
+                                    if (girlOrBoy.equals("boy")) {
+                                        bp.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundBoy));
+                                        bf.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundBoy));
+                                        bd.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundBoy));
+                                        bs.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundBoy));
+                                    } else {
+                                        bp.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackground));
+                                        bf.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackground));
+                                        bd.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackground));
+                                        bs.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackground));
+                                    }
+                                }
+                                //Changing pictures based on happiness level
+                                if (babyHappiness > 75) {
+                                    babyImage.setImageResource(R.drawable.babyhappy);
+                                } else if (babyHappiness > 35) {
+                                    babyImage.setImageResource(R.drawable.babyneutral);
+                                } else {
+                                    babyImage.setImageResource(R.drawable.babysad);
+                                }
+
+                                if (papaHappiness > 75) {
+                                    papaImage.setImageResource(R.drawable.papahappy);
+                                } else if (papaHappiness > 35) {
+                                    papaImage.setImageResource(R.drawable.papaneutral);
+                                } else {
+                                    papaImage.setImageResource(R.drawable.papasad);
+                                }
+
+                                //Papa taking a nap
+                                if (nap == 0 && isPapaNap) {
+                                    papaHappiness -= 1;
+                                    papaTiredness += 1;
+                                    isPapaNap = false;
+                                    buTakeANap.setText(bu_take_a_nap);
+                                    buBabyPlay.setText(bu_play_baby);
+                                    buDiaper.setText(bu_diaper);
+                                    buDrinkBeer.setText(bu_drink_beer);
+                                    buFeed.setText(bu_feed);
+                                    buPlayGame.setText(bu_play_game);
+                                    buPee.setText(bu_pee);
+                                    buSleep.setText(bu_sleep);
+
+                                    pplay.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundPapa));
+                                    pbeer.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundPapa));
+                                    ppee.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundPapa));
+                                    pnap.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundPapa));
+
+                                    if (girlOrBoy.equals("boy")) {
+                                        bp.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundBoy));
+                                        bf.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundBoy));
+                                        bd.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundBoy));
+                                        bs.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundBoy));
+                                    } else {
+                                        bp.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackground));
+                                        bf.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackground));
+                                        bd.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackground));
+                                        bs.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackground));
+                                    }
+
+                                } else if (nap == 0) {
+                                    papaHappiness -= 1;
+                                    papaTiredness += 1;
+                                } else if (nap > 0) {
+                                    int newPT = 6 + random.nextInt(8) - gameMode * 2;
+                                    papaTiredness -= newPT;
+                                    nap -= 1;
+                                    buTakeANap.setText(String.valueOf(nap));
+                                    buBabyPlay.setText(String.valueOf(nap));
+                                    buDiaper.setText(String.valueOf(nap));
+                                    buDrinkBeer.setText(String.valueOf(nap));
+                                    buFeed.setText(String.valueOf(nap));
+                                    buPlayGame.setText(String.valueOf(nap));
+                                    buPee.setText(String.valueOf(nap));
+                                    buSleep.setText(String.valueOf(nap));
+
+                                    papaImage.setImageResource(R.drawable.papanap);
+
+                                    bp.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
+                                    bf.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
+                                    bd.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
+                                    bs.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
+
+                                    pplay.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
+                                    pbeer.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
+                                    ppee.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
+                                    pnap.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
+                                }
+
+                                if (papaTiredness < 0) {
+                                    //isPapaNap = false;
+                                    nap = 0;
+                                    papaTiredness = 0;
+                                }
 
 //If baby is sleeping
-                            if (sleep < 0) {
-                                sleep += 1;
-                                babyHappiness -= 1;
-                                buSleep.setText(String.valueOf(sleep));
-                            } else if (sleep == 0 && isPapaPlaying) {
-                                babyHappiness -= 1;
-                                buSleep.setText(String.valueOf(papaPlaying));
-                            } else if (sleep == 0 && isPapaNap) {
-                                babyHappiness -= 1;
-                                buSleep.setText(String.valueOf(nap));
-                            } else if (sleep == 0) {
-                                babyHappiness -= 1;
-                                buSleep.setText(bu_sleep);
-                                buBabyPlay.setText(bu_play_baby);
-                                buFeed.setText(bu_feed);
-                                if (girlOrBoy.equals("boy")) {
-                                    bp.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundBoy));
-                                    bf.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundBoy));
-                                    bs.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundBoy));
-                                } else {
-                                    bp.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackground));
-                                    bf.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackground));
-                                    bs.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackground));
+                                if (sleep < 0) {
+                                    sleep += 1;
+                                    babyHappiness -= 1;
+                                    buSleep.setText(String.valueOf(sleep));
+                                } else if (sleep == 0 && isPapaPlaying) {
+                                    babyHappiness -= 1;
+                                    buSleep.setText(String.valueOf(papaPlaying));
+                                } else if (sleep == 0 && isPapaNap) {
+                                    babyHappiness -= 1;
+                                    buSleep.setText(String.valueOf(nap));
+                                } else if (sleep == 0) {
+                                    babyHappiness -= 1;
+                                    buSleep.setText(bu_sleep);
+                                    buBabyPlay.setText(bu_play_baby);
+                                    buFeed.setText(bu_feed);
+                                    if (girlOrBoy.equals("boy")) {
+                                        bp.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundBoy));
+                                        bf.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundBoy));
+                                        bs.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackgroundBoy));
+                                    } else {
+                                        bp.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackground));
+                                        bf.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackground));
+                                        bs.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.buttonBackground));
+                                    }
+                                } else if (sleep > 0) {
+                                    sleep -= 1;
+                                    buSleep.setText(String.valueOf(bu_sleep + " " + sleep));
+                                    buBabyPlay.setText(String.valueOf(bu_sleep + " " + sleep));
+                                    buFeed.setText(String.valueOf(bu_sleep + " " + sleep));
+
+                                    babyImage.setImageResource(R.drawable.babysleep);
+
+                                    bp.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
+                                    bf.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
+                                    bs.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
                                 }
-                            } else if (sleep > 0) {
-                                sleep -= 1;
-                                buSleep.setText(String.valueOf(bu_sleep + " " + sleep));
-                                buBabyPlay.setText(String.valueOf(bu_sleep + " " + sleep));
-                                buFeed.setText(String.valueOf(bu_sleep + " " + sleep));
+                                //No need to check, continuously changing values based on game mode
+                                feedLevel -= 1;
+                                diaperLevel += 1;
+                                peeLevel += 1;
 
-                                babyImage.setImageResource(R.drawable.babysleep);
+                                //Update Baby Text views
+                                bv.setText(String.valueOf(babyHappiness));
+                                bv2.setText(String.valueOf(feedLevel));
+                                bv3.setText(String.valueOf(diaperLevel));
 
-                                bp.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
-                                bf.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
-                                bs.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
-                            }
-                            //No need to check, continuously changing values based on game mode
-                            feedLevel -= 1;
-                            diaperLevel += 1;
-                            peeLevel += 1;
+                                //Update Papa Text views
+                                pv.setText(String.valueOf(papaHappiness));
+                                pv2.setText(String.valueOf(papaTiredness));
+                                pv3.setText(String.valueOf(peeLevel));
 
-                            //Update Baby Text views
-                            bv.setText(String.valueOf(babyHappiness));
-                            bv2.setText(String.valueOf(feedLevel));
-                            bv3.setText(String.valueOf(diaperLevel));
+                                //Changing lights according to values
+                                if (babyHappiness >= 90) {
+                                    lightBabyHappiness.setImageResource(R.drawable.light_winner);
+                                } else if (babyHappiness >= 50) {
+                                    lightBabyHappiness.setImageResource(R.drawable.light_green);
+                                } else if (babyHappiness >= 25) {
+                                    lightBabyHappiness.setImageResource(R.drawable.light_yellow);
+                                } else {
+                                    lightBabyHappiness.setImageResource(R.drawable.light_red);
+                                }
 
-                            //Update Papa Text views
-                            pv.setText(String.valueOf(papaHappiness));
-                            pv2.setText(String.valueOf(papaTiredness));
-                            pv3.setText(String.valueOf(peeLevel));
+                                if (papaHappiness >= 90) {
+                                    lightPapaHappiness.setImageResource(R.drawable.light_winner);
+                                } else if (papaHappiness >= 50) {
+                                    lightPapaHappiness.setImageResource(R.drawable.light_green);
+                                } else if (papaHappiness >= 25) {
+                                    lightPapaHappiness.setImageResource(R.drawable.light_yellow);
+                                } else {
+                                    lightPapaHappiness.setImageResource(R.drawable.light_red);
+                                }
 
-                            //Changing lights according to values
-                            if (babyHappiness >= 90){
-                                lightBabyHappiness.setImageResource(R.drawable.light_winner);
-                            } else if (babyHappiness >= 50) {
-                                lightBabyHappiness.setImageResource(R.drawable.light_green);
-                            } else if (babyHappiness >= 25) {
-                                lightBabyHappiness.setImageResource(R.drawable.light_yellow);
-                            }else  {
-                                lightBabyHappiness.setImageResource(R.drawable.light_red);
-                            }
+                                if (feedLevel >= 90) {
+                                    lightFeedLevel.setImageResource(R.drawable.light_winner);
+                                } else if (feedLevel >= 50) {
+                                    lightFeedLevel.setImageResource(R.drawable.light_green);
+                                } else if (feedLevel >= 25) {
+                                    lightFeedLevel.setImageResource(R.drawable.light_yellow);
+                                } else {
+                                    lightFeedLevel.setImageResource(R.drawable.light_red);
+                                }
 
-                            if (papaHappiness >= 90){
-                                lightPapaHappiness.setImageResource(R.drawable.light_winner);
-                            } else if (papaHappiness >= 50) {
-                                lightPapaHappiness.setImageResource(R.drawable.light_green);
-                            } else if (papaHappiness >= 25) {
-                                lightPapaHappiness.setImageResource(R.drawable.light_yellow);
-                            }else  {
-                                lightPapaHappiness.setImageResource(R.drawable.light_red);
-                            }
+                                if (papaTiredness < 50) {
+                                    lightTiredness.setImageResource(R.drawable.light_winner);
+                                } else if (papaTiredness > 85) {
+                                    lightTiredness.setImageResource(R.drawable.light_red);
+                                } else {
+                                    lightTiredness.setImageResource(R.drawable.light_green);
+                                }
 
-                            if (feedLevel >= 90){
-                                lightFeedLevel.setImageResource(R.drawable.light_winner);
-                            } else if (feedLevel >= 50) {
-                                lightFeedLevel.setImageResource(R.drawable.light_green);
-                            } else if (feedLevel >= 25) {
-                                lightFeedLevel.setImageResource(R.drawable.light_yellow);
-                            }else  {
-                                lightFeedLevel.setImageResource(R.drawable.light_red);
-                            }
+                                if (diaperLevel <= 50) {
+                                    lightDiaperLevel.setImageResource(R.drawable.light_green);
+                                } else if (diaperLevel > 85) {
+                                    lightDiaperLevel.setImageResource(R.drawable.light_red);
+                                } else {
+                                    lightDiaperLevel.setImageResource(R.drawable.light_yellow);
+                                }
 
-                            if (papaTiredness < 50){
-                                lightTiredness.setImageResource(R.drawable.light_winner);
-                            } else if (papaTiredness > 85){
-                                lightTiredness.setImageResource(R.drawable.light_red);
-                            } else {
-                                lightTiredness.setImageResource(R.drawable.light_green);
-                            }
-
-                            if (diaperLevel <= 50){
-                                lightDiaperLevel.setImageResource(R.drawable.light_green);
-                            } else if (diaperLevel > 85){
-                                lightDiaperLevel.setImageResource(R.drawable.light_red);
-                            } else {
-                                lightDiaperLevel.setImageResource(R.drawable.light_yellow);
-                            }
-
-                            if (peeLevel <= 50){
-                                lightPeeLevel.setImageResource(R.drawable.light_green);
-                            } else if (peeLevel > 85){
-                                lightPeeLevel.setImageResource(R.drawable.light_red);
-                            } else {
-                                lightPeeLevel.setImageResource(R.drawable.light_yellow);
+                                if (peeLevel <= 50) {
+                                    lightPeeLevel.setImageResource(R.drawable.light_green);
+                                } else if (peeLevel > 85) {
+                                    lightPeeLevel.setImageResource(R.drawable.light_red);
+                                } else {
+                                    lightPeeLevel.setImageResource(R.drawable.light_yellow);
+                                }
                             }
                         }
-                    }
                     }
                 });
             }
@@ -650,7 +647,7 @@ public class BabyCare extends AppCompatActivity {
             badParentHelperBH();
         } else if (papaHappiness <= 0) {
             badParentHelperPH();
-        } else if ( feedLevel <= 0) {
+        } else if (feedLevel <= 0) {
             badParentHelperFL();
         }
 
@@ -687,27 +684,31 @@ public class BabyCare extends AppCompatActivity {
             }
         }, 3000, 1000);
     }
-private void badParentHelperBH(){
-    TextView tvInfo = (TextView) findViewById(R.id.tv_info);
-    TextView bv = (TextView) findViewById(R.id.baby_happiness);
 
-    tvInfo.setText(String.valueOf(babyName + "'s Happiness dropped to 0. " + getString(R.string.game_over)));
-    bv.setText(String.valueOf(":(("));
-}
-    private void badParentHelperPH(){
+    private void badParentHelperBH() {
+        TextView tvInfo = (TextView) findViewById(R.id.tv_info);
+        TextView bv = (TextView) findViewById(R.id.baby_happiness);
+
+        tvInfo.setText(String.valueOf(babyName + "'s Happiness dropped to 0. " + getString(R.string.game_over)));
+        bv.setText(String.valueOf(":(("));
+    }
+
+    private void badParentHelperPH() {
         TextView tvInfo = (TextView) findViewById(R.id.tv_info);
         TextView pv = (TextView) findViewById(R.id.papa_happiness);
 
         tvInfo.setText(String.valueOf(papaName + "'s Happiness dropped to 0. " + getString(R.string.game_over)));
         pv.setText(String.valueOf(":(("));
     }
-    private void badParentHelperFL(){
+
+    private void badParentHelperFL() {
         TextView tvInfo = (TextView) findViewById(R.id.tv_info);
         TextView bv2 = (TextView) findViewById(R.id.baby_feed);
 
         tvInfo.setText(String.valueOf(babyName + "'s Feed level dropped to 0. " + getString(R.string.game_over)));
         bv2.setText(String.valueOf(":(("));
     }
+
     public void playIncrement(View view) {
         if (!isGameOver || !isMumCalled || !isWinner) {
             TextView tvInfo = (TextView) findViewById(R.id.tv_info);
@@ -1188,7 +1189,7 @@ private void badParentHelperBH(){
             TextView pause = (TextView) findViewById(R.id.bu_pause);
 
             //Views for baby button backgrounds changes
-            View bp = findViewById(R.id.bu_baby_play);
+            View bp = findViewById(bu_baby_play);
             View bf = findViewById(R.id.bu_feed);
             View bd = findViewById(R.id.bu_diaper);
             View bs = findViewById(R.id.bu_sleep);
@@ -1284,7 +1285,7 @@ private void badParentHelperBH(){
                 papaImage.setImageResource(R.drawable.papahappy);
 
                 //Views for baby button backgrounds changes
-                View bp = findViewById(R.id.bu_baby_play);
+                View bp = findViewById(bu_baby_play);
                 View bf = findViewById(R.id.bu_feed);
                 View bd = findViewById(R.id.bu_diaper);
                 View bs = findViewById(R.id.bu_sleep);
@@ -1345,9 +1346,9 @@ private void badParentHelperBH(){
         isMumCalled = true;
 
         Intent callMumIntent = new Intent(this, CallMum.class);
-        callMumIntent.putExtra("baby_name_to_send",babyName);
-        callMumIntent.putExtra("papa_name_to_send",papaName);
-        callMumIntent.putExtra("girl_or_boy",girlOrBoyToIntent);
+        callMumIntent.putExtra("baby_name_to_send", babyName);
+        callMumIntent.putExtra("papa_name_to_send", papaName);
+        callMumIntent.putExtra("girl_or_boy", girlOrBoyToIntent);
         startActivity(callMumIntent);
     }
 
@@ -1357,9 +1358,9 @@ private void badParentHelperBH(){
         isGameOver = true;
 
         Intent gameOverIntent = new Intent(this, GameOver.class);
-        gameOverIntent.putExtra("baby_name_to_send",babyName);
-        gameOverIntent.putExtra("papa_name_to_send",papaName);
-        gameOverIntent.putExtra("girl_or_boy",girlOrBoyToIntent);
+        gameOverIntent.putExtra("baby_name_to_send", babyName);
+        gameOverIntent.putExtra("papa_name_to_send", papaName);
+        gameOverIntent.putExtra("girl_or_boy", girlOrBoyToIntent);
         startActivity(gameOverIntent);
     }
 
@@ -1400,9 +1401,9 @@ private void badParentHelperBH(){
         Intent winnerIntent = new Intent(this, Winner.class);
         winnerIntent.putExtra("difficulty", selectedDifficulty);
         winnerIntent.putExtra("score", score);
-        winnerIntent.putExtra("baby_name_to_send",babyName);
-        winnerIntent.putExtra("papa_name_to_send",papaName);
-        winnerIntent.putExtra("girl_or_boy",girlOrBoyToIntent);
+        winnerIntent.putExtra("baby_name_to_send", babyName);
+        winnerIntent.putExtra("papa_name_to_send", papaName);
+        winnerIntent.putExtra("girl_or_boy", girlOrBoyToIntent);
         startActivity(winnerIntent);
     }
 
@@ -1416,7 +1417,7 @@ private void badParentHelperBH(){
     private void preventMultipleTapsInGameCycle() {
 
         //Views for baby button backgrounds changes
-        View bp = findViewById(R.id.bu_baby_play);
+        View bp = findViewById(bu_baby_play);
         View bf = findViewById(R.id.bu_feed);
         View bd = findViewById(R.id.bu_diaper);
         View bs = findViewById(R.id.bu_sleep);
@@ -1438,7 +1439,7 @@ private void badParentHelperBH(){
         bd.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
         bs.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.inactive_button));
 
-          if (isButtonPressedInCycleAlready){
+        if (isButtonPressedInCycleAlready) {
 
             TextView tvInfo = (TextView) findViewById(R.id.tv_info);
             tvInfo.setText(String.valueOf("You can only click any button once every " + timeSpeed + " milliseconds due to the selected difficulty."));
@@ -1447,4 +1448,3 @@ private void badParentHelperBH(){
     }
 //Closing bracket
 }
-

@@ -9,73 +9,56 @@ import android.view.View;
 import android.widget.TextView;
 
 public class Winner extends AppCompatActivity {
-
-    String winner_activity_b = "You have successfully completed the game on ";
-    String winner_activity_bb = " difficulty.";
-
     String babyName;
     String papaName;
     String girlOrBoyToIntent;
     //To E-Mail
     String address[] = {"iv.lcgjc@gmail.com"};
-    String subject = "BabyCareChallenge Winner";
+    String subject;
     String sendMessage;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_winner);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
         //Get intent extras level from BabyCare
         final String difficulty = getIntent().getExtras().getString("difficulty");
         final int finalScore = getIntent().getExtras().getInt("score");
-
-
         //Set correct values to TextViews
         TextView diff = (TextView) findViewById(R.id.tv_winner_difficulty);
-        diff.setText(String.valueOf(winner_activity_b + difficulty + winner_activity_bb));
-
+        diff.setText(String.valueOf(getString(R.string.winner_activity_b) + difficulty + getString(R.string.winner_activity_bb)));
         TextView gameScore = (TextView) findViewById(R.id.tv_winner_score);
         gameScore.setText(String.valueOf(finalScore));
-
+//Get values from intent extras
         final String babyNameFromMainMenu = getIntent().getExtras().getString("baby_name_to_send");
         final String papaNameFromMainMenu = getIntent().getExtras().getString("papa_name_to_send");
         final String girlOrBoy = getIntent().getExtras().getString("girl_or_boy");
         babyName = babyNameFromMainMenu;
         papaName = papaNameFromMainMenu;
         girlOrBoyToIntent = girlOrBoy;
+        //Set the mail subject
+        subject = getString(R.string.winner_subject);
 //Set the predefined message body
-        sendMessage = papaName + " successfully completed the BabyCareChallenge game with baby " + girlOrBoy + ": " + babyName + " on " + difficulty + " game difficulty with a score of " + finalScore + ".";
+        sendMessage = papaName + getString(R.string.successfully_completed) + girlOrBoy + getString(R.string.colon) + babyName + getString(R.string._on_) + difficulty + getString(R.string._game_diff_with_score) + finalScore + getString(R.string.dot);
     }
-
     @Override
     public void onBackPressed() {
 /*Do nothing*/
     }
-
     public void restart(View view) {
         Intent backToMainMenu = new Intent(this, MainMenu.class);
         backToMainMenu.putExtra("baby_name_to_send", babyName);
         backToMainMenu.putExtra("papa_name_to_send", papaName);
         backToMainMenu.putExtra("girl_or_boy", girlOrBoyToIntent);
-
         backToMainMenu.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(backToMainMenu);
     }
-
     public void quitScreen(View view) {
-
         Intent quitScrIntent = new Intent(this, QuitScreen.class);
-
         quitScrIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(quitScrIntent);
-
     }
-
     public void sendEmail(View view) {
-
         Intent sendEmailIntent = new Intent(Intent.ACTION_SENDTO);
         sendEmailIntent.setData(Uri.parse("mailto:"));
         sendEmailIntent.putExtra(Intent.EXTRA_EMAIL, address);

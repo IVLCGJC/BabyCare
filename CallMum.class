@@ -7,30 +7,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 public class CallMum extends AppCompatActivity {
-
     String babyName;
     String papaName;
     String girlOrBoyToIntent;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call_mum);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
         final String babyNameFromMainMenu = getIntent().getExtras().getString("baby_name_to_send");
         final String papaNameFromMainMenu = getIntent().getExtras().getString("papa_name_to_send");
         final String girlOrBoy = getIntent().getExtras().getString("girl_or_boy");
         babyName = babyNameFromMainMenu;
         papaName = papaNameFromMainMenu;
         girlOrBoyToIntent = girlOrBoy;
-
     }
-
     @Override
     public void onBackPressed() {
         /*Do nothing*/
-
     }
     public void restart(View view){
         Intent backToMainMenu = new Intent(this, MainMenu.class);

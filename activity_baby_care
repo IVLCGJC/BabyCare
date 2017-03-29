@@ -11,7 +11,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -19,7 +20,8 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:baselineAligned="false">
 
 
             <LinearLayout
@@ -35,7 +37,7 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
-                    android:text="Lotti"
+                    android:text="@string/baby_name"
                     android:textColor="@color/babyGirl"
                     android:textSize="20sp" />
 
@@ -52,7 +54,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="8dp"
-                android:background="@color/babyGirl"></View>
+                android:background="@color/babyGirl"
+                android:baselineAligned="false"></View>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -67,7 +70,7 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
-                    android:text="Happiness"
+                    android:text="@string/happiness"
                     android:textAllCaps="true"
                     android:textColor="@color/babyGirl"
                     android:textSize="16sp" />
@@ -85,7 +88,7 @@
                     android:layout_height="20dp"
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
-                    android:text="100"
+                    android:text="@string/placeholder_number"
                     android:textColor="@color/babyGirl"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -104,7 +107,7 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
-                    android:text="Feed level"
+                    android:text="@string/feed_level"
                     android:textAllCaps="true"
                     android:textColor="@color/babyGirl"
                     android:textSize="16sp" />
@@ -123,7 +126,7 @@
 
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
-                    android:text="0"
+                    android:text="@string/placeholder_number"
                     android:textColor="@color/babyGirl"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -141,7 +144,7 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
-                    android:text="diaper level"
+                    android:text="@string/diaper_level"
                     android:textAllCaps="true"
                     android:textColor="@color/babyGirl"
                     android:textSize="16sp" />
@@ -159,7 +162,7 @@
                     android:layout_height="20dp"
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
-                    android:text="0"
+                    android:text="@string/placeholder_number"
                     android:textColor="@color/babyGirl"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -169,8 +172,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="8dp"
-                android:background="@color/babyGirl"></View>
-
+                android:background="@color/babyGirl"
+                android:baselineAligned="false"></View>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -340,8 +343,8 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_weight="1"
-            android:orientation="vertical">
-
+            android:orientation="vertical"
+            android:baselineAligned="false">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -363,7 +366,7 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
-                    android:text="Papa"
+                    android:text="@string/papa_name"
                     android:textColor="@color/papa"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -372,7 +375,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="8dp"
-                android:background="@color/papa"></View>
+                android:background="@color/papa"
+                android:baselineAligned="false"></View>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -386,7 +390,7 @@
                     android:layout_height="20dp"
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
-                    android:text="100"
+                    android:text="@string/placeholder_number"
                     android:textColor="@color/papa"
                     android:textSize="16sp" />
 
@@ -403,7 +407,7 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
-                    android:text="Happiness"
+                    android:text="@string/happiness"
                     android:textAllCaps="true"
                     android:textColor="@color/papa"
                     android:textSize="16sp" />
@@ -421,7 +425,7 @@
                     android:layout_height="20dp"
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
-                    android:text="0"
+                    android:text="@string/placeholder_number"
                     android:textColor="@color/papa"
                     android:textSize="16sp" />
 
@@ -438,7 +442,7 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
-                    android:text="Tiredness"
+                    android:text="@string/tiredness"
                     android:textAllCaps="true"
                     android:textColor="@color/papa"
                     android:textSize="16sp" />
@@ -456,7 +460,7 @@
                     android:layout_height="20dp"
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
-                    android:text="0"
+                    android:text="@string/placeholder_number"
                     android:textColor="@color/papa"
                     android:textSize="16sp" />
 
@@ -473,7 +477,7 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
-                    android:text="Pee level"
+                    android:text="@string/pee_level"
                     android:textAllCaps="true"
                     android:textColor="@color/papa"
                     android:textSize="16sp" />
@@ -483,8 +487,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="8dp"
-                android:background="@color/papa"></View>
-
+                android:background="@color/papa"
+                android:baselineAligned="false"></View>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -651,7 +655,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:baselineAligned="false">
 
         <TextView
             android:id="@+id/tv_info"
@@ -661,7 +666,7 @@
             android:background="@color/info_bg"
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
-            android:text="Info field blablablablablablablbalbalbvdvdvddvdlablablabla :)"
+            android:text="@string/placeholder"
             android:textColor="@color/babyGirl"
             android:textSize="14sp" />
 
@@ -671,7 +676,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -721,14 +727,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="8dp">
-
+        android:padding="8dp"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="right"
+            android:gravity="start"
             android:orientation="horizontal">
 
             <TextView
@@ -757,6 +763,7 @@
                 android:textSize="16sp" />
 
         </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

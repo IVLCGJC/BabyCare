@@ -11,21 +11,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="6">
-
+        android:layout_weight="6"
+        android:baselineAligned="false">
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="16dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:baselineAligned="false">
 
         <TextView
             android:id="@+id/babyname"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:background="@color/babyGirlBackground"
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
@@ -39,13 +39,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="left"
+            android:gravity="start"
             android:orientation="horizontal">
 
             <Button
@@ -67,7 +68,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="right"
+            android:gravity="end"
             android:orientation="horizontal">
 
             <Button

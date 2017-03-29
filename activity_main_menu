@@ -16,7 +16,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:baselineAligned="false">
 
         <TextView
             android:id="@+id/main_baby_name"
@@ -28,7 +29,7 @@
             android:layout_weight="1"
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
-            android:text="Baby Name"
+            android:text="@string/main_tv_baby_name"
             android:textAllCaps="true"
             android:textColor="@color/babyGirl"
             android:textSize="20sp" />
@@ -43,7 +44,7 @@
             android:layout_weight="1"
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
-            android:text="Papa Name"
+            android:text="@string/main_tv_papa_name"
             android:textAllCaps="true"
             android:textColor="@color/babyGirl"
             android:textSize="20sp" />
@@ -53,7 +54,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:baselineAligned="false">
 
         <EditText
             android:id="@+id/baby_name_field"
@@ -83,7 +85,8 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_margin="4dp"
-        android:background="@color/babyGirl"></View>
+        android:background="@color/babyGirl"
+        android:baselineAligned="false"></View>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -103,7 +106,7 @@
                 android:checked="true"
                 android:fontFamily="sans-serif-medium"
                 android:onClick="onGirlButtonClicked"
-                android:text="Baby Girl"
+                android:text="@string/main_tv_baby_girl"
                 android:textColor="@color/babyGirl"
                 android:textSize="16sp" />
 
@@ -114,7 +117,7 @@
                 android:checked="false"
                 android:fontFamily="sans-serif-medium"
                 android:onClick="onBoyButtonClicked"
-                android:text="Baby Boy"
+                android:text="@string/main_tv_baby_boy"
                 android:textColor="@color/babyBoy"
                 android:textSize="16sp" />
         </RadioGroup>
@@ -122,7 +125,8 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:baselineAligned="false">
 
             <ImageView
                 android:id="@+id/main_baby_pic"
@@ -138,13 +142,15 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_margin="4dp"
-        android:background="@color/babyGirl"></View>
+        android:background="@color/babyGirl"
+        android:baselineAligned="false"></View>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:baselineAligned="false">
 
         <TextView
             android:id="@+id/main_select_difficulty"
@@ -155,7 +161,7 @@
             android:layout_weight="1"
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
-            android:text="Select Difficulty"
+            android:text="@string/select_difficulty"
             android:textAllCaps="true"
             android:textColor="@color/babyGirl"
             android:textSize="20sp" />
@@ -169,7 +175,7 @@
             android:layout_weight="1"
             android:background="@color/buttonBackground"
             android:onClick="easyButton"
-            android:text="Easy"
+            android:text="@string/bu_easy"
             android:textColor="@color/babyGirlBackground" />
 
         <Button
@@ -181,7 +187,7 @@
             android:layout_weight="1"
             android:background="@color/buttonBackground"
             android:onClick="normalButton"
-            android:text="Normal"
+            android:text="@string/bu_normal"
             android:textColor="@color/babyGirlBackground" />
 
         <Button
@@ -193,35 +199,36 @@
             android:layout_weight="1"
             android:background="@color/buttonBackground"
             android:onClick="hardButton"
-            android:text="Hard"
+            android:text="@string/bu_hard"
             android:textColor="@color/babyGirlBackground" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_margin="4dp"
-            android:background="@color/babyGirl"></View>
+            android:background="@color/babyGirl"
+            android:baselineAligned="false"></View>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="8dp"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:baselineAligned="false">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="left"
+                android:gravity="start"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/tutorial_button"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:layout_weight="1"
                     android:background="@color/buttonBackground"
                     android:fontFamily="sans-serif-medium"
                     android:onClick="tutorial"
@@ -235,15 +242,14 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="right"
+                android:gravity="end"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/bu_quit_game_over"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                    android:layout_weight="1"
                     android:background="@color/buttonBackgroundPapa"
                     android:fontFamily="sans-serif-medium"
                     android:onClick="quitScreen"

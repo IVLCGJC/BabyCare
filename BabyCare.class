@@ -286,7 +286,7 @@ public class BabyCare extends AppCompatActivity {
                                     tvInfo.setText(String.valueOf(papaName + getString(R.string.s_happiness_at_max)));
                                 }
                                 //Checking level overflows
-                                if (diaperLevel > 100) {
+                                if (diaperLevel >= 100) {
                                     diaperLevel = 0;
                                     int diaperRandom = random.nextInt(10);
                                     int newBH = 5 + diaperRandom + gameMode * 3;
@@ -294,7 +294,7 @@ public class BabyCare extends AppCompatActivity {
                                     modifiedHappiness = newBH;
                                     tvInfo.setText(String.valueOf(babyName + getString(R.string.s_diaper_overflow)));
                                 }
-                                if (peeLevel > 100) {
+                                if (peeLevel >= 100) {
                                     peeLevel = 0;
                                     int peeRandom = random.nextInt(10);
                                     int newPH = 10 + peeRandom * gameMode;
@@ -302,7 +302,7 @@ public class BabyCare extends AppCompatActivity {
                                     modifiedHappinessPapa = newPH;
                                     tvInfo.setText(String.valueOf(papaName + getString(R.string.could_not_pee)));
                                 }
-                                if (papaTiredness > 100) {
+                                if (papaTiredness >= 100) {
                                     isPapaNap = true;
                                     nap = 9 + gameMode * 3;
                                     tvInfo.setText(String.valueOf(papaName + getString(R.string.s_tiredness_fell_asleep)));

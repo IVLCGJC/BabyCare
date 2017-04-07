@@ -684,9 +684,9 @@ public class BabyCare extends AppCompatActivity {
                     displayTiredness(papaTiredness);
                     //To add + sign if necessary otherwise minus number
                     if (randomPlay >= 0) {
-                        tvInfo.setText(String.valueOf(babyName + getString(R.string.s_happiness_plus) + randomPlay + getString(R.string._and_) + papaName + getString(R.string.s_happiness_plus) + randomPlayPapa + getString(R.string._and_) + getString(R.string.s_tiredness_plus) + PT));
+                        tvInfo.setText(String.valueOf(babyName + getString(R.string.s_happiness_plus) + randomPlay + getString(R.string._and_) + papaName + getString(R.string.s_happiness_plus) + randomPlayPapa + getString(R.string._and_) + papaName + getString(R.string.s_tiredness_plus) + PT));
                     } else {
-                        tvInfo.setText(String.valueOf(babyName + getString(R.string.s_happiness_) + randomPlay + getString(R.string._and_) + papaName + getString(R.string.s_happiness_) + randomPlayPapa + getString(R.string._and_) + getString(R.string.s_tiredness_plus) + PT));
+                        tvInfo.setText(String.valueOf(babyName + getString(R.string.s_happiness_) + randomPlay + getString(R.string._and_) + papaName + getString(R.string.s_happiness_) + randomPlayPapa + getString(R.string._and_) +  papaName + getString(R.string.s_tiredness_plus) + PT));
                     }
                 }
             }
@@ -802,9 +802,9 @@ public class BabyCare extends AppCompatActivity {
                 displayTiredness(papaTiredness);
                 //If baby happiness is positive a + sign needs to be added to the text else not
                 if (sumBH >= 0) {
-                    tvInfo.setText(String.valueOf(babyName + getString(R.string.s_happiness_plus) + sumBH + getString(R.string._and_) + papaName + getString(R.string.s_happiness_) + sumPH + getString(R.string._and_) + getString(R.string.s_tiredness_plus) + sumPT));
+                    tvInfo.setText(String.valueOf(babyName + getString(R.string.s_happiness_plus) + sumBH + getString(R.string._and_) + papaName + getString(R.string.s_happiness_) + sumPH + getString(R.string._and_) + papaName +  getString(R.string.s_tiredness_plus) + sumPT));
                 } else {
-                    tvInfo.setText(String.valueOf(babyName + getString(R.string.s_happiness_) + sumBH + getString(R.string._and_) + papaName + getString(R.string.s_happiness_) + sumPH + getString(R.string._and_) + getString(R.string.s_tiredness_plus) + sumPT));
+                    tvInfo.setText(String.valueOf(babyName + getString(R.string.s_happiness_) + sumBH + getString(R.string._and_) + papaName + getString(R.string.s_happiness_) + sumPH + getString(R.string._and_) + papaName +  getString(R.string.s_tiredness_plus) + sumPT));
                 }
             }
         }
@@ -847,7 +847,7 @@ public class BabyCare extends AppCompatActivity {
                     displayDiaperLevel(diaperLevel);
                     displayPapaHappiness(papaHappiness);
                     displayTiredness(papaTiredness);
-                    tvInfo.setText(String.valueOf(babyName + getString(R.string.s_happiness_minus) + newBH + getString(R.string._and_) + papaName + getString(R.string.s_happiness_minus) + newPH + getString(R.string._and_) + getString(R.string.s_tiredness_plus) + newPT));
+                    tvInfo.setText(String.valueOf(babyName + getString(R.string.s_happiness_minus) + newBH + getString(R.string._and_) + papaName + getString(R.string.s_happiness_minus) + newPH + getString(R.string._and_) + papaName +  getString(R.string.s_tiredness_plus) + newPT));
                 } else {
                     int newBH = 5 + gameMode * 3;
                     babyHappiness -= newBH;
@@ -864,7 +864,7 @@ public class BabyCare extends AppCompatActivity {
                     displayDiaperLevel(diaperLevel);
                     displayPapaHappiness(papaHappiness);
                     displayTiredness(papaTiredness);
-                    tvInfo.setText(String.valueOf(babyName + getString(R.string.s_happiness_minus) + newBH + getString(R.string._and_) + papaName + getString(R.string.s_happiness_minus) + newPH + getString(R.string._and_) + getString(R.string.s_tiredness_plus) + newPT));
+                    tvInfo.setText(String.valueOf(babyName + getString(R.string.s_happiness_minus) + newBH + getString(R.string._and_) + papaName + getString(R.string.s_happiness_minus) + newPH + getString(R.string._and_) + papaName +  getString(R.string.s_tiredness_plus) + newPT));
                 }
             }
         }
@@ -979,7 +979,7 @@ public class BabyCare extends AppCompatActivity {
                     displayPapaHappiness(papaHappiness);
                     displayPeeLevel(peeLevel);
                     displayTiredness(papaTiredness);
-                    tvInfo.setText(String.valueOf(getString(R.string.drinking_beer)  + papaName + getString(R.string.s_happiness_plus) + newPH + getString(R.string._and_) + getString(R.string.s_tiredness_plus) + newPT + getString(R.string._and_) + getString(R.string.pee_level_plus) + newPL));
+                    tvInfo.setText(String.valueOf(getString(R.string.drinking_beer)  + papaName + getString(R.string.s_happiness_plus) + newPH + getString(R.string._and_) + papaName +  getString(R.string.s_tiredness_plus) + newPT + getString(R.string._and_) + papaName +  getString(R.string.pee_level_plus) + newPL));
                 }
             }
         }

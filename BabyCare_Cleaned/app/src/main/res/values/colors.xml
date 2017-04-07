@@ -11,7 +11,9 @@
     <color name="buttonBackgroundBoy">#7E57C2</color>
     <color name="buttonBackgroundPapa">#5C6BC0</color>
     <color name="papa">#303F9F</color>
-    <color name="info_bg">#FF8A65</color>
+    <color name="info_bg">#7dffaf65</color>
     <color name="inactive_button">#9E9E9E</color>
+    <color name="score_background">#4fff4081</color>
+    <color name="textOpaqueBackground">#a8fce4ec</color>
 
 </resources>
